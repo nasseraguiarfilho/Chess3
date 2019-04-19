@@ -5,12 +5,13 @@ import boardgame.Piece;
 import boardgame.Position;
 
 public class ChessPiece extends Piece {
-	
+
 	private Color color;
 	private int moveCount;
 
-	public ChessPiece(Position position, Board board) {
-		super(position, board);
+	public ChessPiece(Board board, Color color) {
+		super(board);
+		this.color = color;
 	}
 
 	@Override
@@ -25,28 +26,38 @@ public class ChessPiece extends Piece {
 		return false;
 	}
 
+	public Color getColor() {
+		return color;
+	}
+
 	@Override
 	public boolean isThereAnyPossibleMove() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	public ChessPosition getChessPosition() {
 		return (ChessPosition) position;
 	}
-	
+
 	public boolean isThereOpponentPiece(Position position) {
 		Board board = this.getBoard();
 		return board.thereIsAPiece(position);
-		
+
 	}
-	
+
 	public void increaseMove() {
 		moveCount++;
 	}
-	
+
 	public void decreaseMove() {
 		moveCount--;
 	}
+	
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
 
 }
