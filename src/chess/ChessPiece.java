@@ -40,10 +40,6 @@ public class ChessPiece extends Piece {
 		return false;
 	}
 
-	public ChessPosition getChessPosition() {
-		return (ChessPosition) position;
-	}
-
 	public boolean isThereOpponentPiece(Position position) {
 		Board board = this.getBoard();
 		return board.thereIsAPiece(position);

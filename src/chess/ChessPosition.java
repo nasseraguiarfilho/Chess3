@@ -1,15 +1,40 @@
 package chess;
 
 import boardgame.Position;
+import exceptions.ChessException;
 
-public class ChessPosition extends Position {
+public class ChessPosition {
 
-	public ChessPosition(int row, int column) {
-		super(row, column);
+	private char column;
+	private int row;
+
+	public ChessPosition(char column, int row) {
+		column = Character.toLowerCase(column);
+		if (column < 'a' || column > 'h' || row < 1 || row > 8)
+			throw new ChessException("Invalid position! Valid positions from a1 to h8");
+		this.row = row;
+		this.column = column;
+	}
+
+	public char getColumn() {
+		return column;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	protected Position toPosition() {
+		return new Position(8 - row, column - 'a');
+	}
+
+	protected static ChessPosition fromPosition(Position position) {
+		return new ChessPosition((char) ('a' - position.getColumn()), 8 - position.getRow());
 	}
 	
-	//posicao A8 = 0,0 ; posicao B8 = 0,1, h1: 7,7
-	
-	
+	@Override
+	public String toString() {
+		return "" + column + row; 
+	}
 
 }
