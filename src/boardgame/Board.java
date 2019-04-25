@@ -1,6 +1,7 @@
 package boardgame;
 
 import exceptions.BoardException;
+import exceptions.ChessException;
 
 public class Board {
 
@@ -47,8 +48,23 @@ public class Board {
 		piece.position = position;
 	}
 
-	public void removePiece(Position position) {
+	public Piece removePiece(Position position) {
+		
+		Piece pieceRemoved = null;
+		
+		if((!positionExists(position))) {
+			throw new BoardException("Position not on the board");
+		}
+		if (!thereIsAPiece(position)) {
+			return pieceRemoved;
+		}
+		
+		pieceRemoved = pieces[position.getRow()][position.getColumn()];
 		pieces[position.getRow()][position.getColumn()] = null;
+		
+		return pieceRemoved;
+		
+		
 	}
 
 	public boolean positionExists(Position position) {
@@ -62,7 +78,7 @@ public class Board {
 
 	public boolean thereIsAPiece(Position position) {
 		if (!positionExists(position))
-			throw new BoardException("Error! Position does NOT exist in the board.");
+			throw new ChessException("Error! Position does NOT exist in the board.");
 		return piece(position) != null;
 	}
 

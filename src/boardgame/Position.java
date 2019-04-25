@@ -3,7 +3,7 @@ package boardgame;
 import exceptions.BoardException;
 
 public class Position {
-	
+
 	private int row;
 	private int column;
 
@@ -42,12 +42,14 @@ public class Position {
 	}
 
 	public boolean validaColumn(int num) {
-		if (num >= 0 && num <= column) return true;
+		if (num >= 0 && num <= column)
+			return true;
 		return false;
 	}
 
 	public boolean validaRow(int num) {
-		if (num >= 0 && num <= row) return true;
+		if (num >= 0 && num <= row)
+			return true;
 		return false;
 	}
 

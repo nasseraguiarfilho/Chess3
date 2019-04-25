@@ -1,4 +1,8 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import chess.ChessPiece;
+import chess.ChessPosition;
 import chess.Color;
 
 public class UI {
@@ -40,9 +44,23 @@ public class UI {
 			System.out.print("- ");
 		else {
 			if (chessPiece.getColor() == Color.WHITE)
-				System.out.println(ANSI_WHITE + chessPiece + ANSI_RESET);
+				System.out.print(ANSI_WHITE + chessPiece + ANSI_RESET + " ");
 			else
-				System.out.println(ANSI_YELLOW + chessPiece + ANSI_RESET);
+				System.out.print(ANSI_YELLOW + chessPiece + ANSI_RESET + " ");
 		}
 	}
+
+	public static ChessPosition ReadChessPosition(Scanner sc) {
+//		try {
+
+			String s = sc.next();
+			char column = s.charAt(0);
+			int row = Integer.parseInt(s.substring(1));
+			return new ChessPosition(column, row);
+			
+//		} catch (RuntimeException e) {
+//			throw new InputMismatchException("Erro reading Chess Position. Valid values from a1 to h8!");
+//		}
+	}
+
 }

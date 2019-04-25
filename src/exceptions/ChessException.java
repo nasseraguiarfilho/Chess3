@@ -1,6 +1,6 @@
 package exceptions;
 
-public class ChessException extends RuntimeException {
+public class ChessException extends BoardException {
 
 	/**
 	 * 
