@@ -39,13 +39,14 @@ public class ProgramChess {
 			System.out.print("Source: ");
 			ChessPosition source = UI.ReadChessPosition(sc);
 			chessMatch.checkOwnPieces(color, source);
+			//todo tratar null returns
 
 			System.out.println();
 			System.out.print("Target: ");
 			ChessPosition target = UI.ReadChessPosition(sc);
 			chessMatch.checkCaptureOwnPiece(color, target);
 
-			chessMatch.performChessMove(source, target);
+			chessMatch.performChessMove(color, source, target);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

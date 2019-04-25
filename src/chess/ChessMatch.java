@@ -85,7 +85,7 @@ public class ChessMatch {
 		return board;
 	}
 
-	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
+	public ChessPiece performChessMove(Color color, ChessPosition sourcePosition, ChessPosition targetPosition) {
 
 		Position source = sourcePosition.toPosition();
 		Position target = targetPosition.toPosition();
@@ -93,10 +93,15 @@ public class ChessMatch {
 		validateSourcePosition(source);
 		Piece capturedPiece = makeMove(source, target);
 
-		// conferircheck/checkmate
-		// trocar a vez pra outra cor
-
+		changeTurn(color);
+		
 		return (ChessPiece) capturedPiece;
+	}
+
+	private void changeTurn(Color color) {
+		if (color == Color.WHITE) currentPlayer = Color.BLACK;
+		if (color == Color.BLACK) currentPlayer = Color.WHITE;
+		turn++;
 	}
 
 	private Piece makeMove(Position source, Position target) {
@@ -128,9 +133,11 @@ public class ChessMatch {
 	}
 
 	public void checkCaptureOwnPiece(Color color, ChessPosition target) {
-		ChessPiece p = (ChessPiece) board.piece(target.toPosition());
-		if (p.getColor() == color)
-			throw new ChessException("Cannot capture or move to " + target + "because there's a piece of yours there!");
+		if (board.thereIsAPiece(target.toPosition())) {
+			ChessPiece p = (ChessPiece) board.piece(target.toPosition());
+			if (p.getColor() == color)
+				throw new ChessException(
+						"Cannot capture or move to " + target + "because there's a piece of yours there!");
+		}
 	}
-
 }
