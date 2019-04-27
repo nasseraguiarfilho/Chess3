@@ -4,7 +4,7 @@ import boardgame.Board;
 import boardgame.Piece;
 import boardgame.Position;
 
-public class ChessPiece extends Piece {
+public abstract class ChessPiece extends Piece {
 
 	private Color color;
 	private int moveCount;
@@ -18,26 +18,8 @@ public class ChessPiece extends Piece {
 		this.color = color;
 	}
 
-	@Override
-	public Piece[][] possibleMoves() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean possibleMove(Position position) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	public Color getColor() {
 		return color;
-	}
-
-	@Override
-	public boolean isThereAnyPossibleMove() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	public boolean isThereOpponentPiece(Position position) {

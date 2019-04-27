@@ -15,7 +15,6 @@ public class ProgramChess {
 	public static void main(String[] args) {
 
 		chessMatch = new ChessMatch();
-		Scanner sc = new Scanner(System.in);
 		UI.printBoard(chessMatch.getPieces());
 
 		do {
@@ -33,13 +32,13 @@ public class ProgramChess {
 
 		try {
 			chessMatch.checkCurrentPlayer(color);
-			
+
 			System.out.println();
 			System.out.println(color + "'s turn.");
 			System.out.print("Source: ");
 			ChessPosition source = UI.ReadChessPosition(sc);
+			chessMatch.checkNullSource(source);
 			chessMatch.checkOwnPieces(color, source);
-			//todo tratar null returns
 
 			System.out.println();
 			System.out.print("Target: ");

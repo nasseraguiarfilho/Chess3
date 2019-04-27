@@ -92,15 +92,16 @@ public class ChessMatch {
 
 		validateSourcePosition(source);
 		Piece capturedPiece = makeMove(source, target);
-
 		changeTurn(color);
-		
+
 		return (ChessPiece) capturedPiece;
 	}
 
 	private void changeTurn(Color color) {
-		if (color == Color.WHITE) currentPlayer = Color.BLACK;
-		if (color == Color.BLACK) currentPlayer = Color.WHITE;
+		if (color == Color.WHITE)
+			currentPlayer = Color.BLACK;
+		if (color == Color.BLACK)
+			currentPlayer = Color.WHITE;
 		turn++;
 	}
 
@@ -115,7 +116,10 @@ public class ChessMatch {
 	private void validateSourcePosition(Position source) {
 		if (!board.thereIsAPiece(source))
 			throw new BoardException("There is no piece on source position!");
+		
+		if (!board.piece(source).isThereAnyPossibleMove()) throw new BoardException("Selected piece has no possible moves!");
 	}
+	
 
 	public Color getCurrentPlayer(Color color) {
 		return currentPlayer;
@@ -137,7 +141,12 @@ public class ChessMatch {
 			ChessPiece p = (ChessPiece) board.piece(target.toPosition());
 			if (p.getColor() == color)
 				throw new ChessException(
-						"Cannot capture or move to " + target + "because there's a piece of yours there!");
+						"Cannot capture or move to " + target + " because there's a piece of yours there!");
 		}
+	}
+
+	public void checkNullSource(ChessPosition source) {
+		if (!board.thereIsAPiece(source.toPosition()))
+			throw new ChessException("Position has no piece!");
 	}
 }

@@ -17,4 +17,10 @@ public class Horse extends ChessPiece {
 		return "H";
 	}
 
+	@Override
+	public boolean[][] possibleMoves() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
