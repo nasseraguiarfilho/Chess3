@@ -91,6 +91,9 @@ public class ChessMatch {
 		Position target = targetPosition.toPosition();
 
 		validateSourcePosition(source);
+		checkOwnPieces(color, source);
+		checkCaptureOwnPiece(color, target);
+
 		Piece capturedPiece = makeMove(source, target);
 		changeTurn(color);
 
@@ -116,17 +119,18 @@ public class ChessMatch {
 	private void validateSourcePosition(Position source) {
 		if (!board.thereIsAPiece(source))
 			throw new BoardException("There is no piece on source position!");
-		
-		if (!board.piece(source).isThereAnyPossibleMove()) throw new BoardException("Selected piece has no possible moves!");
+
+		if (!board.piece(source).isThereAnyPossibleMove())
+			throw new BoardException("Selected piece has no possible moves!");
+		//bem aqui, como ele ve que tem lance possivel (a matriz contem algum true), ele nao lanca a excessao.
 	}
-	
 
 	public Color getCurrentPlayer(Color color) {
 		return currentPlayer;
 	}
 
-	public void checkOwnPieces(Color color, ChessPosition source) {
-		ChessPiece p = (ChessPiece) board.piece(source.toPosition());
+	public void checkOwnPieces(Color color, Position source) {
+		ChessPiece p = (ChessPiece) board.piece(source);
 		if (p.getColor() != color)
 			throw new ChessException("It's not " + color + "'s piece!");
 	}
@@ -136,17 +140,16 @@ public class ChessMatch {
 			throw new ChessException("It's not " + color + "'s turn!");
 	}
 
-	public void checkCaptureOwnPiece(Color color, ChessPosition target) {
-		if (board.thereIsAPiece(target.toPosition())) {
-			ChessPiece p = (ChessPiece) board.piece(target.toPosition());
+	public void checkCaptureOwnPiece(Color color, Position target) {
+		if (board.thereIsAPiece(target)) {
+			ChessPiece p = (ChessPiece) board.piece(target);
 			if (p.getColor() == color)
 				throw new ChessException(
 						"Cannot capture or move to " + target + " because there's a piece of yours there!");
 		}
 	}
 
-	public void checkNullSource(ChessPosition source) {
-		if (!board.thereIsAPiece(source.toPosition()))
-			throw new ChessException("Position has no piece!");
+	public void validateNullSource(Position source) {
+
 	}
 }

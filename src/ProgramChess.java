@@ -37,17 +37,15 @@ public class ProgramChess {
 			System.out.println(color + "'s turn.");
 			System.out.print("Source: ");
 			ChessPosition source = UI.ReadChessPosition(sc);
-			chessMatch.checkNullSource(source);
-			chessMatch.checkOwnPieces(color, source);
 
 			System.out.println();
 			System.out.print("Target: ");
 			ChessPosition target = UI.ReadChessPosition(sc);
-			chessMatch.checkCaptureOwnPiece(color, target);
 
 			chessMatch.performChessMove(color, source, target);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println(e.getMessage());
 			playersTurn(color);
 		}

@@ -31,13 +31,13 @@ public class Board {
 
 	public Piece piece(int row, int column) {
 		if (!positionExists(row, column))
-			throw new BoardException("Error! Position does NOT exist in the board.");
+			throw new BoardException("Error! Position does not exist on the board.");
 		return pieces[row][column];
 	}
 
 	public Piece piece(Position position) {
 		if (!positionExists(position))
-			throw new BoardException("Error! Position does NOT exist in the board.");
+			throw new BoardException("Error! Position does not exist on the board.");
 		return pieces[position.getRow()][position.getColumn()];
 	}
 
@@ -49,22 +49,21 @@ public class Board {
 	}
 
 	public Piece removePiece(Position position) {
-		
+
 		Piece pieceRemoved = null;
-		
-		if((!positionExists(position))) {
+
+		if ((!positionExists(position))) {
 			throw new BoardException("Position not on the board");
 		}
 		if (!thereIsAPiece(position)) {
 			return pieceRemoved;
 		}
-		
+
 		pieceRemoved = pieces[position.getRow()][position.getColumn()];
 		pieces[position.getRow()][position.getColumn()] = null;
-		
+
 		return pieceRemoved;
-		
-		
+
 	}
 
 	public boolean positionExists(Position position) {
@@ -77,9 +76,9 @@ public class Board {
 	}
 
 	public boolean thereIsAPiece(Position position) {
-		if (!positionExists(position))
-			throw new ChessException("Error! Position does NOT exist in the board.");
-		return piece(position) != null;
+		if (pieces[position.getRow()][position.getColumn()] != null)
+			return true;
+		return false;
 	}
 
 }
