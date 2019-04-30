@@ -1,7 +1,5 @@
 package boardgame;
 
-import exceptions.BoardException;
-
 public class Position {
 
 	private int row;
@@ -33,12 +31,9 @@ public class Position {
 		return row + ", " + column;
 	}
 
-	public void setValues(int row, int column) throws BoardException {
-		if (validaRow(row) && validaColumn(column)) {
-			this.row = row;
-			this.column = column;
-		} else
-			throw new BoardException("Not a valid position!");
+	public void setValues(int row, int column) {
+		this.row = row;
+		this.column = column;
 	}
 
 	public boolean validaColumn(int num) {

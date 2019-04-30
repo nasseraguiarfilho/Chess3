@@ -45,7 +45,6 @@ public class ProgramChess {
 			chessMatch.performChessMove(color, source, target);
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.out.println(e.getMessage());
 			playersTurn(color);
 		}

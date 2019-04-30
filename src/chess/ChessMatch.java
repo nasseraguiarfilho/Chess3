@@ -92,6 +92,7 @@ public class ChessMatch {
 
 		validateSourcePosition(source);
 		checkOwnPieces(color, source);
+		validateTargetPosition(source, target);
 		checkCaptureOwnPiece(color, target);
 
 		Piece capturedPiece = makeMove(source, target);
@@ -122,7 +123,12 @@ public class ChessMatch {
 
 		if (!board.piece(source).isThereAnyPossibleMove())
 			throw new BoardException("Selected piece has no possible moves!");
-		//bem aqui, como ele ve que tem lance possivel (a matriz contem algum true), ele nao lanca a excessao.
+
+	}
+
+	private void validateTargetPosition(Position source, Position target) {
+		if (!board.piece(source).possibleMove(target))
+			throw new BoardException("Selected piece (" + board.piece(source) + ")  can`t move the designated target!");
 	}
 
 	public Color getCurrentPlayer(Color color) {
@@ -149,7 +155,4 @@ public class ChessMatch {
 		}
 	}
 
-	public void validateNullSource(Position source) {
-
-	}
 }

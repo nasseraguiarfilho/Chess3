@@ -51,16 +51,12 @@ public class UI {
 	}
 
 	public static ChessPosition ReadChessPosition(Scanner sc) {
-//		try {
 
-			String s = sc.next();
-			char column = s.charAt(0);
-			int row = Integer.parseInt(s.substring(1));
-			return new ChessPosition(column, row);
-			
-//		} catch (RuntimeException e) {
-//			throw new InputMismatchException("Erro reading Chess Position. Valid values from a1 to h8!");
-//		}
+		String s = sc.next();
+		char column = s.charAt(0);
+		int row = Integer.parseInt(s.substring(1));
+		return new ChessPosition(column, row);
+
 	}
 
 }
