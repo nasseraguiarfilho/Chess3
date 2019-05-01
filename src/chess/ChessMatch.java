@@ -68,7 +68,7 @@ public class ChessMatch {
 	}
 
 	private void placePawns(Color color, int row) {
-		for (int i = 0; i < 8; i++) {
+		for (int i = 1; i < 8; i++) {
 			placeNewPiece(((char) ('a' + (char) i)), row, new Pawn(board, color));
 		}
 	}
@@ -153,6 +153,11 @@ public class ChessMatch {
 				throw new ChessException(
 						"Cannot capture or move to " + target + " because there's a piece of yours there!");
 		}
+	}
+	
+	public boolean[][] possibleMoves(ChessPosition position) {
+		validateSourcePosition(position.toPosition());
+		return board.piece(position.toPosition()).possibleMoves();
 	}
 
 }

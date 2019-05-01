@@ -1,6 +1,7 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
 import chess.Color;
@@ -31,7 +32,7 @@ public class UI {
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print(8 - i + " ");
 			for (int j = 0; j < pieces.length; j++) {
-				printPiece(pieces[i][j]);
+				printPiece(pieces[i][j], false);
 			}
 			System.out.println();
 		}
@@ -39,9 +40,13 @@ public class UI {
 
 	}
 
-	private static void printPiece(ChessPiece chessPiece) {
+	private static void printPiece(ChessPiece chessPiece, boolean background) {
+
+		if (background)
+			System.out.print(ANSI_BLUE_BACKGROUND);
+
 		if (chessPiece == null)
-			System.out.print("- ");
+			System.out.print("- " + ANSI_RESET);
 		else {
 			if (chessPiece.getColor() == Color.WHITE)
 				System.out.print(ANSI_WHITE + chessPiece + ANSI_RESET + " ");
@@ -57,6 +62,27 @@ public class UI {
 		int row = Integer.parseInt(s.substring(1));
 		return new ChessPosition(column, row);
 
+	}
+
+	public static void clearScreen() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+
+	public static void printAvaliableOptions(ChessPiece[][] pieces, boolean[][] background) {
+
+		for (int i = 0; i < pieces.length; i++) {
+			System.out.print(8 - i + " ");
+			for (int j = 0; j < pieces.length; j++) {
+				if (background[i][j] == true)
+					printPiece(pieces[i][j], true);
+				else 
+					printPiece(pieces[i][j], false);
+			}
+			System.out.println();
+		}
+		
+		System.out.println("  a b c d e f g h");
 	}
 
 }

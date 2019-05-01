@@ -31,12 +31,19 @@ public class ProgramChess {
 	private static void playersTurn(Color color) {
 
 		try {
+			
 			chessMatch.checkCurrentPlayer(color);
-
+			
 			System.out.println();
 			System.out.println(color + "'s turn.");
 			System.out.print("Source: ");
 			ChessPosition source = UI.ReadChessPosition(sc);
+			
+			
+			boolean[][] possibleMoves = chessMatch.possibleMoves(source);
+			UI.clearScreen();
+			UI.printAvaliableOptions(chessMatch.getPieces(), possibleMoves);
+			
 
 			System.out.println();
 			System.out.print("Target: ");
